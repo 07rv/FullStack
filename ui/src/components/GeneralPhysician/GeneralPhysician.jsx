@@ -14,7 +14,7 @@ const GeneralPhysician = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
-            <Link to="/" style={{textDecoration: 'none'}}>
+            <Link to="/doctorlist" style={{textDecoration: 'none'}}>
               <b sx={{color: 'text.primary'}}>
               <Box sx={{ color: 'text.primary' }}>General Physician</Box>
               </b>
