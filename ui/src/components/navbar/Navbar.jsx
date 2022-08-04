@@ -34,6 +34,8 @@ export const Navbar = () => {
           </Box>      
         </Toolbar>
       </AppBar>
+      <Box sx={{display: 'flex', justifyContent: 'center', m:2}}>
+      </Box>
     </Box>
   );
 }

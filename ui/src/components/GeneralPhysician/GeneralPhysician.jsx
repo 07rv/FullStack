@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import {Link} from "react-router-dom";
 import Search from '../search/Search';
+import Doctor from '../Doctor/Doctor';
+import { doctors } from '../../data/doctor';
 
 const GeneralPhysician = () => {
   return (
@@ -27,9 +29,16 @@ const GeneralPhysician = () => {
           </Box>      
         </Toolbar>
       </AppBar>
-
       <Box sx={{mt:2, ml:4}}>
         <Search/>
+      </Box>
+
+      <Box sx={{display: 'flex',flexDirection: 'row',flexWrap: 'wrap',}}>
+      {doctors.map(items=>(
+          <Doctor key={items.id} name={items.name} degree={items.degree} 
+                  hospital={items.hospital} experience = {items.experience+': years'}
+                  award={items.award} />
+        ))}
       </Box>
     </Box>
   )
