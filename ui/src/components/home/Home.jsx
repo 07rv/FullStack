@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <Box sx={{ flexGrow: 0 }}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar sx={{flexDirection: 'row'}}>
           <Typography variant="h6" component="div" sx={{ flexGrow: 0}}>
             <Link to="" style={{textDecoration: 'none'}}>
               <b sx={{color: 'text.primary'}}>
@@ -48,9 +48,6 @@ const Home = () => {
                 </Link>
               </div>
             </Paper>
-            <Link to="/home" style={{textDecoration: 'none'}}>
-              <Button type='submit' color='primary' variant='contained' fullWidth>Sign In</Button>
-            </Link>
           </Box>  
         </Toolbar>
       </AppBar>
