@@ -12,15 +12,15 @@ import Button from '@mui/material/Button';
 import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import Search from '../search/Search';
-
+import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 
 const Home = () => {
   const paperStyle = {padding:10,  margin:"20px auto"}
   return (
-    <Box sx={{ flexGrow: 0 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar sx={{flexDirection: 'row'}}>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 0}}>
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{flexGrow:0}}>
             <Link to="" style={{textDecoration: 'none'}}>
               <b sx={{color: 'text.primary'}}>
               <Box sx={{ color: 'text.primary' }}>HealthXOXO</Box>
@@ -49,11 +49,21 @@ const Home = () => {
               </div>
             </Paper>
           </Box>  
+          <Typography sx={{flexGrow:1}}>
+          </Typography>
+          <Box align='right' sx={{flexGrow:1, ml:10}}>
+            <Link to="/login" style={{textDecoration: 'none'}}>
+              <Button style={{backgroundColor: "#121313c8"}} type='submit' variant='contained'>Logout <ExitToAppOutlinedIcon/></Button>
+            </Link>
+          </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{mt:2, ml:5}}>
+
+
+      <Box sx={{ml:5, mt:2}}>
         <Search/>
       </Box>
+
       <Box sx={{display: 'flex',justifyContent: 'flex-end',m:2}}>
         <Card sx={{ minWidth: 275 }}>
           <CardContent >
