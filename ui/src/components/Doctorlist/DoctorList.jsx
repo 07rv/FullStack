@@ -25,7 +25,7 @@ const DoctorList = () => {
             </Typography>  
             <Box sx={{ml:10 ,alignItems: 'center',}}>
               <Paper sx={{display: 'flex', flexDirection: 'row'}}  elevation={10} style={paperStyle}>
-                <Link to="" style={{textDecoration: 'none'}}>
+                <Link to="/generalphysician" style={{textDecoration: 'none'}}>
                   <Box sx={{ mr:5, color: 'text.primary', fontWeight: 'bold' }}>General Physician</Box>
                 </Link>
                 <Link to="" style={{textDecoration: 'none'}}>

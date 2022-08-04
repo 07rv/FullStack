@@ -4,6 +4,7 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import Home from './components/home/Home';
 import DoctorList from './components/Doctorlist/DoctorList';
+import GeneralPhysician from './components/GeneralPhysician/GeneralPhysician';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 
@@ -17,6 +18,7 @@ const App = () => {
           <Route exact path="/register" element={<Register />}/>
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/doctorlist" element={<DoctorList />} />
+          <Route exact path="/generalphysician" element={<GeneralPhysician />} />
         </Routes>
       </Router>
     </div>
