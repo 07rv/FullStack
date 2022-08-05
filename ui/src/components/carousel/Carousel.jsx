@@ -17,7 +17,7 @@ export default function Carousel() {
   return (
     <Box>
         <Navbar/>
-        <Card sx={{ maxWidth: '100%', ml:20, mr:20 }}>
+        <Card sx={{ maxWidth: '100%', ml:20, mr:20, lt:2, mb:3 }}>
         <CardHeader
             avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -49,6 +49,7 @@ export default function Carousel() {
             </IconButton>
         </CardActions>
         </Card>
+        
     </Box>
   );
 }
