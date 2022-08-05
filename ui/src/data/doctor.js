@@ -36,4 +36,13 @@ export const doctors = [
         award: "rv",  
         img: "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=600.jpg",          
     },
+    {
+        id:5,
+        name: "Name 2",
+        degree : "MD",
+        hospital: "abc",
+        experience: "10",
+        award: "xyz", 
+        img: "https://images.pexels.com/photos/2182979/pexels-photo-2182979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1.jpg",           
+    },
 ]

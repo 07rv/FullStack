@@ -16,8 +16,8 @@ const Doctor = ({name, degree, hospital, experience, award, img}) => {
             <Card component="form"sx={{ mb:2, p: '2px 4px', display: 'flex',justifyContent: 'center', alignItems: 'center', width: 400 }}>
                 <Box sx={{flexDirection: 'column' }}>
                     <CardContent sx={{  width:175  }}>
-                        <Typography component="div" variant="h7" sx={{display: 'flex', justifyContent: 'center', }}>
-                            {name}
+                        <Typography component="div" sx={{display: 'flex', justifyContent: 'center', }}>
+                           <b>{name}</b> 
                         </Typography>
                         <Typography variant="subtitle1" color="text.secondary" component="div" sx={{display: 'flex', justifyContent: 'center', }}>
                             {degree}
