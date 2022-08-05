@@ -23,7 +23,7 @@ const GeneralPhysician = () => {
             </Link>
           </Typography>
           <Box>
-            <Link to="/login" style={{textDecoration: 'none'}}>
+            <Link to="/" style={{textDecoration: 'none'}}>
                 <Button style={{backgroundColor: "#121313c8"}} type='submit' variant='contained'>Logout <ExitToAppOutlinedIcon/></Button>
             </Link>
           </Box>      
@@ -37,7 +37,7 @@ const GeneralPhysician = () => {
       {doctors.map(items=>(
           <Doctor key={items.id} name={items.name} degree={items.degree} 
                   hospital={items.hospital} experience = {items.experience+': years'}
-                  award={items.award} />
+                  award={items.award} img={items.img} />
         ))}
       </Box>
     </Box>

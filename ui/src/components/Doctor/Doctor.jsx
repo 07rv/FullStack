@@ -10,7 +10,7 @@ import IosShareIcon from '@mui/icons-material/IosShare';
 import Divider from '@mui/material/Divider';
 import InboxIcon from '@mui/icons-material/Inbox';
 
-const Doctor = ({name, degree, hospital, experience, award}) => {
+const Doctor = ({name, degree, hospital, experience, award, img}) => {
     return (
         <Box sx={{width: 400, m:2,}}>
             <Card component="form"sx={{ mb:2, p: '2px 4px', display: 'flex',justifyContent: 'center', alignItems: 'center', width: 400 }}>
@@ -36,7 +36,7 @@ const Doctor = ({name, degree, hospital, experience, award}) => {
                 <CardMedia
                     component="img"
                     sx={{width: 151, height: 175, bgcolor: 'warning.main' }}
-                    image="https://img.freepik.com/free-photo/young-handsome-physician-medical-robe-with-stethoscope_1303-17818.jpg?w=740&t=st=1659632411~exp=1659633011~hmac=6b195d5242f240e034cc43aec1efaee2534c900761271be0728b951aafa8de63.jpg"
+                    image={img}
                     alt="Live from space album cover"
                 />
             </Card>

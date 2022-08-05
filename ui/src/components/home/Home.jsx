@@ -49,7 +49,7 @@ const Home = () => {
           <Typography sx={{flexGrow:1}}>
           </Typography>
           <Box align='right' sx={{flexGrow:1, ml:10}}>
-            <Link to="/login" style={{textDecoration: 'none'}}>
+            <Link to="/" style={{textDecoration: 'none'}}>
               <Button style={{backgroundColor: "#121313c8"}} type='submit' variant='contained'>Logout <ExitToAppOutlinedIcon/></Button>
             </Link>
           </Box>
