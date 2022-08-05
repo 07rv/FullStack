@@ -9,6 +9,7 @@ import {Link} from "react-router-dom";
 import Search from '../search/Search';
 import Doctor from '../Doctor/Doctor';
 import { doctors } from '../../data/doctor';
+import Grid from '@mui/material/Grid';
 
 const GeneralPhysician = () => {
   return (
@@ -32,7 +33,7 @@ const GeneralPhysician = () => {
       <Box sx={{mt:2, ml:4}}>
         <Search/>
       </Box>
-
+      
       <Box sx={{display: 'flex',flexDirection: 'row',flexWrap: 'wrap',}}>
       {doctors.map(items=>(
           <Doctor key={items.id} name={items.name} degree={items.degree} 

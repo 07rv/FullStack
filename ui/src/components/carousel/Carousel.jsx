@@ -21,11 +21,11 @@ export default function Carousel() {
         <CardHeader
             avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                R
+                RV
             </Avatar>
             }
-            title="Shrimp and Chorizo Paella"
-            subheader="September 14, 2016"
+            title="Prevent heart diease"
+            subheader="Auguest 8, 2022"
         />
         <CardMedia
             component="img"
@@ -35,9 +35,11 @@ export default function Carousel() {
         />
         <CardContent>
             <Typography variant="body2" color="text.secondary">
-            This impressive paella is a perfect party dish and a fun meal to cook
-            together with your guests. Add 1 cup of frozen peas along with the mussels,
-            if you like.
+            High blood pressure is a major risk factor for heart disease. 
+            It is important to get your blood pressure checked regularly - 
+            at least once a year for most adults, and more often if you have 
+            high blood pressure. Take steps, including lifestyle changes, 
+            to prevent or control high blood pressure.
             </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -49,7 +51,6 @@ export default function Carousel() {
             </IconButton>
         </CardActions>
         </Card>
-        
     </Box>
   );
 }
