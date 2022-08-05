@@ -10,6 +10,7 @@ import Search from '../search/Search';
 import Doctor from '../Doctor/Doctor';
 import { doctors } from '../../data/doctor';
 import Grid from '@mui/material/Grid';
+import Profile from '../Profile/Profile';
 
 const GeneralPhysician = () => {
   return (
@@ -30,16 +31,24 @@ const GeneralPhysician = () => {
           </Box>      
         </Toolbar>
       </AppBar>
-      <Box sx={{mt:2, ml:4}}>
-        <Search/>
-      </Box>
-      
-      <Box sx={{display: 'flex',flexDirection: 'row',flexWrap: 'wrap',}}>
-      {doctors.map(items=>(
-          <Doctor key={items.id} name={items.name} degree={items.degree} 
-                  hospital={items.hospital} experience = {items.experience+': years'}
-                  award={items.award} img={items.img} />
-        ))}
+
+
+      <Box sx={{ maxWidth: '100%', ml:2, mr:2, mb:3 }}>
+        <Grid container spacing={1} sx={{m:2, display: 'flex',flexDirection: 'row'}}>
+          <Grid item xs={9} >
+            <Search/>
+            <Box sx={{display: 'flex',flexDirection: 'row',flexWrap: 'wrap',}}>
+              {doctors.map(items=>(
+                <Doctor key={items.id} name={items.name} degree={items.degree} 
+                    hospital={items.hospital} experience = {items.experience+': years'}
+                    award={items.award} img={items.img} />
+              ))}
+            </Box>
+          </Grid>
+          <Grid item xs={2.5}>
+            <Profile/>
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   )
