@@ -15,7 +15,7 @@ const Login = () => {
               <Avatar> <AccountCircleIcon/> </Avatar>
               <h2>Sign In</h2> 
             </Grid>
-            <TextField sx={{mb:2}} label="username" placeholder='Enter username' fullWidth/>
+            <TextField sx={{mb:2}} label="email" placeholder='Enter email' fullWidth/>
             <TextField label="password" placeholder='Enter password' type="password" fullWidth/>
             <FormControlLabel
               control={
