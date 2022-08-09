@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,38 +24,53 @@ namespace backend.DataAccessFolder
             return new SqlConnection(this._connectionString);
         }
 
-        public Task<IAsyncResult> SignIn(SignInRequest signInRequest)
+        public Task<SignInResponse> SignIn(SignInRequest signInRequest)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IAsyncResult> SignUp(SignUpRequest signUpRequest)
+        public async Task<SignUpResponse> SignUp(SignUpRequest signUpRequest)
         {
-            SignInResponse signInResponse = new SignInResponse();
-            signInResponse.IsSuccess = true;
-            signInResponse.Message = "Sucessfull";
+            SignUpResponse signUpResponse = new SignUpResponse();
+            signUpResponse.IsSuccess = true;
+            signUpResponse.Message = "Sucessfull";
+            SqlConnection sqlConnection = GetConnection();
             try
             {
-                SqlConnection sqlConnection = GetConnection();
+                if (!signUpRequest.password.Equals(signUpRequest.confirmPassword))
+                {
+                    signUpResponse.IsSuccess = false;
+                    signUpResponse.Message = "Password and confirm Password not match";
+                    return signUpResponse;
+                }
                 if(sqlConnection.State != System.Data.ConnectionState.Open)
                     await sqlConnection.OpenAsync();
 
-                using(SqlCommand sql = new SqlCommand())
+                using(SqlCommand sqlCommand = new SqlCommand("dbo.InsertNewUsers", sqlConnection))
                 {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.CommandTimeout = 180;
+                    sqlCommand.Parameters.AddWithValue("@EmailId", signUpRequest.emailid);
+                    sqlCommand.Parameters.AddWithValue("@FirstName", signUpRequest.firstName);
+                    sqlCommand.Parameters.AddWithValue("@LastName", string.IsNullOrEmpty(signUpRequest.lastName) ? null : signUpRequest.lastName);
+                    sqlCommand.Parameters.AddWithValue("@Password", signUpRequest.password);
+                    sqlCommand.Parameters.AddWithValue("@Age", Convert.ToString(signUpRequest.age).Equals(0) ? null : signUpRequest.age);
+                    sqlCommand.Parameters.AddWithValue("@Address", string.IsNullOrEmpty(signUpRequest.address) ? null : signUpRequest.address);
 
+                    int status = await sqlCommand.ExecuteNonQueryAsync();
                 }
             }
             catch(Exception ex)
             {
-                signInResponse.IsSuccess = false;
-                signInResponse.Message = "UnSucessfull";
+                signUpResponse.IsSuccess = false;
+                signUpResponse.Message = "Un sSucessfull";
             }
             finally
             {
-
+                await sqlConnection.CloseAsync();
+                await sqlConnection.DisposeAsync();
             }
-            throw new NotImplementedException();
-
+            return signUpResponse;
         }
     }
 }

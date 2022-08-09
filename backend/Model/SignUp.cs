@@ -10,14 +10,16 @@ namespace backend.Model
     {
         [Required]
         public string firstName {get;set;}
-        [Required]
         public string lastName { get; set; }
         [Required]
         public string emailid { get; set; }
         [Required]
         public string password { get; set; }
         [Required]
-        public string confirmPassword { get; set; }        
+        public string confirmPassword { get; set; }
+        public string address { get; set; }
+        public int ?age { get; set; }
+       
     }
 
     public class SignUpResponse

@@ -18,12 +18,12 @@ namespace backend.Controllers
             _authDL = authDL;
         }
         [HttpPost]
-        public IActionResult Signup(SignUpRequest signUpRequest)
+        public async Task<IActionResult> SignupAsync(SignUpRequest signUpRequest)
         {
             SignUpResponse signUpResponse = new SignUpResponse();
             try
             {
-
+                signUpResponse =  await _authDL.SignUp(signUpRequest);
             }
             catch (Exception ex)
             {

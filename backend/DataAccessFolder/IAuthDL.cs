@@ -8,7 +8,7 @@ namespace backend.DataAccessFolder
 {
     public interface IAuthDL
     {
-        public Task<IAsyncResult> SignUp(SignUpRequest signUpRequest);
-        public Task<IAsyncResult> SignIn(SignInRequest signInRequest);
+        public Task<SignUpResponse> SignUp(SignUpRequest signUpRequest);
+        public Task<SignInResponse> SignIn(SignInRequest signInRequest);
     }
 }
