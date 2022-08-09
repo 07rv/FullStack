@@ -1,10 +1,10 @@
 
-CREATE PROCEDURE InsertNewUsers
-	@EmailId varchar, @FirstName varchar, @LastName varchar,
-	@Password varchar, @Age int, @Address varchar
+ALTER PROCEDURE InsertNewUsers
+	@EmailId varchar(255), @FirstName varchar(255), @LastName varchar(255),
+	@Password varchar(255), @Age int, @Address varchar(255)
 As
 BEGIN
-	INSERT INTO HeathXOXO.Users(EmailId, FirstName, LastName, Password, Age, Address)
+	INSERT INTO HeathXOXO.dbo.Users(EmailId, FirstName, LastName, Password, Age, Address)
 	VALUES (@EmailId, @FirstName, @LastName, @Password, @Age, @Address);
 END
 GO
