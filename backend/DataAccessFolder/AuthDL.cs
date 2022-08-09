@@ -43,7 +43,7 @@ namespace backend.DataAccessFolder
                     signUpResponse.Message = "Password and confirm Password not match";
                     return signUpResponse;
                 }
-                if(sqlConnection.State != System.Data.ConnectionState.Open)
+                if(sqlConnection.State != ConnectionState.Open)
                     await sqlConnection.OpenAsync();
 
                 using(SqlCommand sqlCommand = new SqlCommand("dbo.InsertNewUsers", sqlConnection))
@@ -63,7 +63,7 @@ namespace backend.DataAccessFolder
             catch(Exception ex)
             {
                 signUpResponse.IsSuccess = false;
-                signUpResponse.Message = "Un sSucessfull";
+                signUpResponse.Message = "Un Sucessfull";
             }
             finally
             {
