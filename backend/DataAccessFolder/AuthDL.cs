@@ -37,9 +37,8 @@ namespace backend.DataAccessFolder
             {
                 SqlConnection sqlConnection = GetConnection();
                 if(sqlConnection.State != System.Data.ConnectionState.Open)
-                {
                     await sqlConnection.OpenAsync();
-                }
+
                 using(SqlCommand sql = new SqlCommand())
                 {
 
