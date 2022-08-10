@@ -26,6 +26,23 @@ namespace backend.DataAccessFolder
 
         public Task<SignInResponse> SignIn(SignInRequest signInRequest)
         {
+            SignInResponse signInResponse = new SignInResponse();
+            signInResponse.IsSuccess = true;
+            signInResponse.Message = "Sucessfull";
+            SqlConnection sqlConnection = GetConnection();
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+                signInResponse.IsSuccess = false;
+                signInResponse.Message = "Un Sucessfull";
+            }
+            finally
+            {
+
+            }
             throw new NotImplementedException();
         }
 
@@ -71,6 +88,26 @@ namespace backend.DataAccessFolder
                 await sqlConnection.DisposeAsync();
             }
             return signUpResponse;
+        }
+
+        public Task<DoctorsResponse> CreateDoctor(DoctorsRequest doctorsRequest)
+        {
+            DoctorsResponse doctorsResponse = new DoctorsResponse();
+            doctorsResponse.IsSuccess = true;
+            doctorsResponse.Message = "Sucessfull";
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+
+            }
+            throw new NotImplementedException();
         }
     }
 }

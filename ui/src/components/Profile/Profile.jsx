@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
+import {Link} from "react-router-dom";
 import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 
@@ -26,6 +27,7 @@ const Profile = () => {
                 <ShareOutlinedIcon fontSize="small"/>Share
               </Typography>
               <Button size="small">More</Button>
+              <Link to='/editprofile' style={{textDecoration: 'none'}}>Forget password?</Link>
             </CardContent>
           </Card>
       </Box>

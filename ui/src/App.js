@@ -7,6 +7,7 @@ import DoctorList from './components/Doctorlist/DoctorList';
 import GeneralPhysician from './components/GeneralPhysician/GeneralPhysician';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Carousel from './components/carousel/Carousel';
+import EditProfile from './components/EditProfile/EditProfile';
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/doctorlist" element={<DoctorList />} />
           <Route exact path="/generalphysician" element={<GeneralPhysician />} />
+          <Route exact path="/editprofile" element={<EditProfile/>}/>
         </Routes>
       </Router>
     </div>

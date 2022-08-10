@@ -29,6 +29,8 @@ namespace backend
             services.AddControllers();
 
             services.AddScoped<IAuthDL, AuthDL>();
+
+            var conn = Configuration.GetConnectionString("Database");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
