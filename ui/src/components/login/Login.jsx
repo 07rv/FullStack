@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import { Navbar } from '../navbar/Navbar';
 
 const Login = () => {
-  const paperStyle = {padding:20, height:'70%', width:410, margin:"20px auto"}
+  const paperStyle = {padding:20, height:400, width:410, margin:"20px auto"}
   return (
     <div>
         <Navbar/>
