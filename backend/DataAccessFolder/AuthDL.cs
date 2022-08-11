@@ -52,7 +52,7 @@ namespace backend.DataAccessFolder
                         else
                         {
                             signInResponse.IsSuccess = false;
-                            signInResponse.Message = "Login Unucessfull";
+                            signInResponse.Message = "Login Failed";
                         }
                     }
                     
@@ -68,7 +68,7 @@ namespace backend.DataAccessFolder
                 await sqlConnection.CloseAsync();
                 await sqlConnection.DisposeAsync();
             }
-            throw new NotImplementedException();
+            return signInResponse;
         }
 
         public async Task<SignUpResponse> SignUp(SignUpRequest signUpRequest)
