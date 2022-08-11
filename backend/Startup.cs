@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend
 {
@@ -28,7 +30,13 @@ namespace backend
         {
             services.AddControllers();
 
+            services.AddDbContext<Class>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Database")
+                ));
+
             services.AddScoped<IAuthDL, AuthDL>();
+
+            services.AddSwaggerGen();
 
             var conn = Configuration.GetConnectionString("Database");
         }
@@ -46,6 +54,16 @@ namespace backend
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseEndpoints(endpoints =>
             {

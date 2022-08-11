@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace backend.Model
 {
-    public class SignInRequest
+    public class Dummy
     {
         [Required]
         [Key]
         public string Emailid { get; set; }
         [Required]
-        public string password { get; set; }
-    }
-    public class SignInResponse
-    {
-        public bool IsSuccess { get; set; }
-        public string Message { get; set; }
+        public string Name { get; set; }
     }
 }

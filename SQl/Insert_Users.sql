@@ -4,7 +4,7 @@ ALTER PROCEDURE InsertNewUsers
 	@Password varchar(255), @Age int, @Address varchar(255)
 As
 BEGIN
-	INSERT INTO HeathXOXO.dbo.Users(EmailId, FirstName, LastName, Password, Age, Address)
+	INSERT INTO HealthXOXO.dbo.Users(EmailId, FirstName, LastName, Password, Age, Address)
 	VALUES (@EmailId, @FirstName, @LastName, @Password, @Age, @Address);
 END
 GO

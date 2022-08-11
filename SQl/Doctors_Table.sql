@@ -1,4 +1,4 @@
-USE [HeathXOXO]
+USE [HealthXOXO]
 
 
 CREATE TABLE Doctors(

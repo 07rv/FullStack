@@ -69,10 +69,10 @@ namespace backend.DataAccessFolder
                     sqlCommand.CommandTimeout = 180;
                     sqlCommand.Parameters.AddWithValue("@EmailId", signUpRequest.emailid);
                     sqlCommand.Parameters.AddWithValue("@FirstName", signUpRequest.firstName);
-                    sqlCommand.Parameters.AddWithValue("@LastName", string.IsNullOrEmpty(signUpRequest.lastName) ? null : signUpRequest.lastName);
+                    sqlCommand.Parameters.AddWithValue("@LastName", signUpRequest.lastName);
                     sqlCommand.Parameters.AddWithValue("@Password", signUpRequest.password);
-                    sqlCommand.Parameters.AddWithValue("@Age", Convert.ToString(signUpRequest.age).Equals(0) ? null : signUpRequest.age);
-                    sqlCommand.Parameters.AddWithValue("@Address", string.IsNullOrEmpty(signUpRequest.address) ? null : signUpRequest.address);
+                    sqlCommand.Parameters.AddWithValue("@Age", signUpRequest.age);
+                    sqlCommand.Parameters.AddWithValue("@Address", signUpRequest.address);
 
                     int status = await sqlCommand.ExecuteNonQueryAsync();
                 }
