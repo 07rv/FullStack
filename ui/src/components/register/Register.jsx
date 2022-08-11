@@ -6,7 +6,7 @@ import { Navbar } from '../navbar/Navbar';
 import AuthServices from '../../services/AuthServices';
 
 const  authServices = new AuthServices();
-function redirectcontact()
+function redirectToLogin()
 {
   window.location="/login";
   window.localStorage.setItem('click',true);
@@ -64,9 +64,8 @@ export class Register extends React.Component {
         "age": 0,
       }
       authServices.SignUp(data).then((data)=>{
-        console.log(data)
         if(data.data.isSuccess){
-          redirectcontact()
+          redirectToLogin()
         }
       }).catch((error)=>{
         console.log(error)
