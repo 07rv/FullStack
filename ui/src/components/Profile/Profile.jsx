@@ -26,8 +26,9 @@ const Profile = () => {
               <Typography sx={{display: 'flex',alignItems: 'center',flexWrap: 'wrap',}} color="text.secondary">
                 <ShareOutlinedIcon fontSize="small"/>Share
               </Typography>
-              <Button size="small">More</Button>
-              <Link to='/editprofile' style={{textDecoration: 'none'}}>Forget password?</Link>
+              <Link to='/editprofile' style={{textDecoration: 'none'}}>
+                <Button size="small">More</Button>
+              </Link>
             </CardContent>
           </Card>
       </Box>
