@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Data.Common;
 
 namespace backend.DataAccessFolder
 {
@@ -24,7 +25,7 @@ namespace backend.DataAccessFolder
             return new SqlConnection(this._connectionString);
         }
 
-        public Task<SignInResponse> SignIn(SignInRequest signInRequest)
+        public async Task<SignInResponse> SignIn(SignInRequest signInRequest)
         {
             SignInResponse signInResponse = new SignInResponse();
             signInResponse.IsSuccess = true;
@@ -32,16 +33,40 @@ namespace backend.DataAccessFolder
             SqlConnection sqlConnection = GetConnection();
             try
             {
+                if (sqlConnection.State != System.Data.ConnectionState.Open)
+                    await sqlConnection.OpenAsync();
 
+                using (SqlCommand sqlCommand = new SqlCommand("dbo.SignInUsers", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.CommandTimeout = 180;
+                    sqlCommand.Parameters.AddWithValue("@EmailId", signInRequest.emailid);
+                    sqlCommand.Parameters.AddWithValue("@Password", signInRequest.password);
+
+                    using (DbDataReader dataReader = await sqlCommand.ExecuteReaderAsync())
+                    {
+                        if (dataReader.HasRows)
+                        {
+                            signInResponse.Message = "Login Sucessfull";
+                        }
+                        else
+                        {
+                            signInResponse.IsSuccess = false;
+                            signInResponse.Message = "Login Unucessfull";
+                        }
+                    }
+                    
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 signInResponse.IsSuccess = false;
-                signInResponse.Message = "Un Sucessfull";
+                signInResponse.Message = ex.Message;
             }
             finally
             {
-
+                await sqlConnection.CloseAsync();
+                await sqlConnection.DisposeAsync();
             }
             throw new NotImplementedException();
         }
@@ -75,12 +100,18 @@ namespace backend.DataAccessFolder
                     sqlCommand.Parameters.AddWithValue("@Address", signUpRequest.address);
 
                     int status = await sqlCommand.ExecuteNonQueryAsync();
+                    if(status <= 0)
+                    {
+                        signUpResponse.IsSuccess = false;
+                        signUpResponse.Message = "Something went wrong";
+                        return signUpResponse;
+                    }
                 }
             }
             catch(Exception ex)
             {
                 signUpResponse.IsSuccess = false;
-                signUpResponse.Message = "Un Sucessfull";
+                signUpResponse.Message = ex.Message;
             }
             finally
             {

@@ -35,12 +35,12 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignIn(SignInRequest signUpRequest)
+        public async Task<IActionResult> SignIn(SignInRequest signInRequest)
         {
             SignInResponse signInResponse = new SignInResponse();
             try
             {
-
+                signInResponse = await _authDL.SignIn(signInRequest);
             }
             catch (Exception ex)
             {

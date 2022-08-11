@@ -10,7 +10,7 @@ namespace backend.Model
     {
         [Required]
         [Key]
-        public string Emailid { get; set; }
+        public string emailid { get; set; }
         [Required]
         public string password { get; set; }
     }
