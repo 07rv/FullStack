@@ -59,6 +59,9 @@ export class Register extends React.Component {
       }
       authServices.SignUp(data).then((data)=>{
         console.log(data)
+        if(data.data.isSuccess){
+          this.props.history.push('/login');
+        }
       }).catch((error)=>{
         console.log(error)
       })
