@@ -3,9 +3,10 @@
     margin: auto;
     width: 50%;
     height: 500px;
-    padding: 10px;
+    padding: 1px;
     align-items: center;
     justify-content: center;
     font-size: 35px;
     display: flex;
+    color: rgb(168, 95, 95);
   }

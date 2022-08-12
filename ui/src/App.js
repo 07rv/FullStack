@@ -30,9 +30,9 @@ const App = () => {
           <Route exact path="*" 
                   element={
                       <Box className='center'>
-                        <SentimentVeryDissatisfiedIcon fontSize="large"/>
-                        <div className='center'>404: Page unreachable</div>
-                        <MarkChatUnreadSharpIcon fontSize="large"/>
+                        <SentimentVeryDissatisfiedIcon sx={{pr:1}} style={{ color: "black" }}fontSize="large"/>
+                        404: Page unreachable
+                        <MarkChatUnreadSharpIcon sx={{pl:1}} style={{ color: "black" }} fontSize="large"/>
                       </Box>}/>
         </Routes>
       </Router>
