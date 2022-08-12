@@ -5,7 +5,13 @@ import {Link} from "react-router-dom";
 import { Navbar } from '../navbar/Navbar';
 import AuthServices from '../../services/AuthServices';
 
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 const  authServices = new AuthServices();
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 function redirectToLogin()
 {
   window.location="/login";
@@ -26,6 +32,9 @@ export class Register extends React.Component {
       emailAddressFlag: false,
       passwordFlag: false,
       confirmPasswordFlag: false,
+      open: false,
+      message: '',
+      severity : 'info'
     }
   }
   paperStyle = {padding:20, height:400, width:510, margin:"20px auto"}
@@ -67,13 +76,34 @@ export class Register extends React.Component {
         if(data.data.isSuccess){
           redirectToLogin()
         }
+        else{
+          this.setState({message: data.data.message})
+          this.setState({severity: 'error'})
+          this.handleClick()
+        }
       }).catch((error)=>{
-        console.log(error)
+        this.setState({message: data.data.message})
+        this.handleClick()
       })
     }
     else{
+      this.setState({message: 'Please enter all the details'})
+      this.setState({severity: 'error'})
+      this.handleClick()
     }
   }
+
+  handleClick = () => {
+    this.setState({open: true})
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({open: false})
+  };
+
   render(){
     return (
       <div>
@@ -125,6 +155,12 @@ export class Register extends React.Component {
             </Typography>
           </Paper>
         </Grid>
+
+        <Snackbar open={this.state.open} autoHideDuration={6000} onClose={this.handleClose}>
+          <Alert onClose={this.handleClose} severity={this.state.severity} sx={{ width: '100%' }}>
+            {this.state.message}
+          </Alert>
+        </Snackbar>
       </div>
     )
   }

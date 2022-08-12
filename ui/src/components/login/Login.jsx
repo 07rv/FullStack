@@ -5,7 +5,15 @@ import {Link} from "react-router-dom";
 import { Navbar } from '../navbar/Navbar';
 import AuthServices from '../../services/AuthServices';
 
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 const  authServices = new AuthServices();
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+
 function redirectToHome()
 {
   window.location="/home";
@@ -20,6 +28,9 @@ export class Login extends React.Component {
       password: '',
       emailAddressFlag: false,
       passwordFlag: false,
+      open: false,
+      message: '',
+      severity : 'info'
     }
   }
   paperStyle = {padding:20, height:400, width:410, margin:"20px auto"}
@@ -46,13 +57,33 @@ export class Login extends React.Component {
         if(data.data.isSuccess){
           redirectToHome()
         }
+        else{
+          this.setState({message: data.data.message})
+          this.setState({severity: 'error'})
+          this.handleClick()
+        }
       }).catch((error)=>{
-        console.log(error)
+        this.setState({message: data.data.message})
+        this.handleClick()
       })
     }
     else{
+      this.setState({message: 'Please Enter Email or Password'})
+      this.setState({severity: 'error'})
+      this.handleClick()
     }
   }
+
+  handleClick = () => {
+    this.setState({open: true})
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({open: false})
+  };
 
   render(){
     return (
@@ -95,6 +126,13 @@ export class Login extends React.Component {
               </Typography>
             </Paper>
           </Grid>
+
+
+        <Snackbar open={this.state.open} autoHideDuration={6000} onClose={this.handleClose}>
+          <Alert onClose={this.handleClose} severity={this.state.severity} sx={{ width: '100%' }}>
+            {this.state.message}
+          </Alert>
+        </Snackbar>
       </div>
     )
   }
