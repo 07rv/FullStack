@@ -4,6 +4,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import { Navbar } from '../navbar/Navbar';
 import AuthServices from '../../services/AuthServices';
+import Configuration from '../../configurations/Configuation';
 
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -54,8 +55,18 @@ export class Register extends React.Component {
       this.setState({emailAddressFlag: true})
     if(this.state.password === '')
       this.setState({passwordFlag: true})
-      if(this.state.confirmPassword === '')
+    if(this.state.confirmPassword === '')
       this.setState({confirmPasswordFlag: true})
+    if(!Configuration.validEmail.test(this.state.emailAddress))
+      this.setState({emailAddressFlag: true})
+    if(this.state.password.length < 7)
+      this.setState({passwordFlag: true})
+    if(this.state.confirmPassword.length < 7)
+      this.setState({confirmPasswordFlag: true})
+    if(this.state.password !== this.state.confirmPassword){
+      this.setState({confirmPasswordFlag: true})
+      this.setState({passwordFlag: true})
+    }
   }
   handleSubmit = e=>{
     this.CheckValidity()
@@ -63,28 +74,50 @@ export class Register extends React.Component {
        this.state.emailAddress !== '' && this.state.confirmPassword !== '' &&
        this.state.confirmPassword !== '')
     {
-      let data = {
-        "firstName": this.state.firstName,
-        "lastName": this.state.lastName,
-        "emailid": this.state.emailAddress,
-        "password": this.state.password,
-        "confirmPassword": this.state.confirmPassword,
-        "address": '',
-        "age": 0,
-      }
-      authServices.SignUp(data).then((data)=>{
-        if(data.data.isSuccess){
-          redirectToLogin()
-        }
-        else{
-          this.setState({message: data.data.message})
-          this.setState({severity: 'error'})
-          this.handleClick()
-        }
-      }).catch((error)=>{
-        this.setState({message: data.data.message})
+      if(!Configuration.validEmail.test(this.state.emailAddress)){
+        this.setState({message: 'Enter valid emailid'})
+        this.setState({severity: 'error'})
         this.handleClick()
-      })
+      }
+      else if(this.state.password.length < 7){
+        this.setState({message: 'Length of password should be atleast 7 character'})
+        this.setState({severity: 'error'})
+        this.handleClick()
+      }
+      else if(this.state.confirmPassword.length < 7){
+        this.setState({message: 'Length of confirm password should be atleast 7 character'})
+        this.setState({severity: 'error'})
+        this.handleClick()
+      }
+      else if(this.state.password !== this.state.confirmPassword){
+        this.setState({message: 'Password & confirm password should be same'})
+        this.setState({severity: 'error'})
+        this.handleClick()
+      }
+      else{
+        let data = {
+          "firstName": this.state.firstName,
+          "lastName": this.state.lastName,
+          "emailid": this.state.emailAddress,
+          "password": this.state.password,
+          "confirmPassword": this.state.confirmPassword,
+          "address": '',
+          "age": 0,
+        }
+        authServices.SignUp(data).then((data)=>{
+          if(data.data.isSuccess){
+            redirectToLogin()
+          }
+          else{
+            this.setState({message: data.data.message})
+            this.setState({severity: 'error'})
+            this.handleClick()
+          }
+        }).catch((error)=>{
+          this.setState({message: data.data.message})
+          this.handleClick()
+        })
+      }
     }
     else{
       this.setState({message: 'Please enter all the details'})

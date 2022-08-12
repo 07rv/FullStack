@@ -4,6 +4,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import { Navbar } from '../navbar/Navbar';
 import AuthServices from '../../services/AuthServices';
+import Configuration from '../../configurations/Configuation';
 
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -44,28 +45,45 @@ export class Login extends React.Component {
       this.setState({emailAddressFlag: true})
     if(this.state.password === '')
       this.setState({passwordFlag: true})
+    if(!Configuration.validEmail.test(this.state.emailAddress))
+      this.setState({emailAddressFlag: true})
+    if(this.state.password.length < 7)
+      this.setState({passwordFlag: true})
   }
   handleSubmit = e=>{
     this.CheckValidity()
-    if(this.state.firstName !== '' && this.state.emailAddress !== '' )
+    if(this.state.password !== '' && this.state.emailAddress !== '' )
     {
-      let data = {
-        "emailid": this.state.emailAddress,
-        "password": this.state.password,
-      }
-      authServices.SignIn(data).then((data)=>{
-        if(data.data.isSuccess){
-          redirectToHome()
-        }
-        else{
-          this.setState({message: data.data.message})
-          this.setState({severity: 'error'})
-          this.handleClick()
-        }
-      }).catch((error)=>{
-        this.setState({message: data.data.message})
+      if(!Configuration.validEmail.test(this.state.emailAddress)){
+        this.setState({message: 'Enter valid emailid'})
+        this.setState({severity: 'error'})
         this.handleClick()
-      })
+      }
+      else if(this.state.password.length < 7){
+        this.setState({message: 'Length of password should be atleast 7 character'})
+        this.setState({severity: 'error'})
+        this.handleClick()
+      }
+      else{
+        let data = {
+          "emailid": this.state.emailAddress,
+          "password": this.state.password,
+        }
+        authServices.SignIn(data).then((data)=>{
+          if(data.data.isSuccess){
+            redirectToHome()
+          }
+          else{
+            this.setState({message: data.data.message})
+            this.setState({severity: 'error'})
+            this.handleClick()
+          }
+        }).catch((error)=>{
+          this.setState({message: data.data.message})
+          this.handleClick()
+        })
+      }
+
     }
     else{
       this.setState({message: 'Please Enter Email or Password'})
