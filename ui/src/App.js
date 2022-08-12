@@ -9,6 +9,9 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Carousel from './components/carousel/Carousel';
 import EditProfile from './components/EditProfile/EditProfile';
 import Box from '@mui/material/Box';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import MarkChatUnreadSharpIcon from '@mui/icons-material/MarkChatUnreadSharp';
+
 
 
 const App = () => {
@@ -24,7 +27,13 @@ const App = () => {
           <Route exact path="/doctorlist" element={<DoctorList />} />
           <Route exact path="/generalphysician" element={<GeneralPhysician />} />
           <Route exact path="/editprofile" element={<EditProfile/>}/>
-          <Route exact path="*" element={<Box align='center' sx={{}}>404: Page unreachable</Box>}/>
+          <Route exact path="*" 
+                  element={
+                      <Box className='center'>
+                        <SentimentVeryDissatisfiedIcon fontSize="large"/>
+                        <div className='center'>404: Page unreachable</div>
+                        <MarkChatUnreadSharpIcon fontSize="large"/>
+                      </Box>}/>
         </Routes>
       </Router>
     </div>
