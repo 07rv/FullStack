@@ -48,3 +48,11 @@ C:\Works Directory\Intern\HealthXOXO\backend\bin\Debug\netcoreapp3.1\runtimes\wi
 C:\Works Directory\Intern\HealthXOXO\backend\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Works Directory\Intern\HealthXOXO\backend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Works Directory\Intern\HealthXOXO\backend\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Works Directory\Intern\HealthXOXO\backend\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Works Directory\Intern\HealthXOXO\backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Works Directory\Intern\HealthXOXO\backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Works Directory\Intern\HealthXOXO\backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Works Directory\Intern\HealthXOXO\backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Works Directory\Intern\HealthXOXO\backend\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Works Directory\Intern\HealthXOXO\backend\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Works Directory\Intern\HealthXOXO\backend\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

@@ -7,6 +7,10 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.Common;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace backend.DataAccessFolder
 {
@@ -47,7 +51,17 @@ namespace backend.DataAccessFolder
                     {
                         if (dataReader.HasRows)
                         {
-                            signInResponse.Message = "Login Sucessfull";
+                            await dataReader.ReadAsync();
+                            signInResponse.IsSuccess = true;
+                            signInResponse.Message = "Sucessfull";
+                            UserInfo userInfo = new UserInfo();
+                            userInfo.firstName = dataReader["FirstName"] != DBNull.Value ? Convert.ToString(dataReader["FirstName"]) : "";
+                            userInfo.lastName = dataReader["LastName"] != DBNull.Value ? Convert.ToString(dataReader["LastName"]) : "";
+                            userInfo.emailid = dataReader["EmailId"] != DBNull.Value ? Convert.ToString(dataReader["EmailId"]) : "";
+                            userInfo.address = dataReader["Address"] != DBNull.Value ? Convert.ToString(dataReader["Address"]) : "";
+                            userInfo.age = dataReader["Age"] != DBNull.Value ? Convert.ToInt32(dataReader["Age"]) : 0;
+
+                            signInResponse.Token = GenerateJwt(userInfo);
                         }
                         else
                         {
@@ -121,24 +135,29 @@ namespace backend.DataAccessFolder
             return signUpResponse;
         }
 
-        public Task<DoctorsResponse> CreateDoctor(DoctorsRequest doctorsRequest)
+        public string GenerateJwt(UserInfo userInfo)
         {
-            DoctorsResponse doctorsResponse = new DoctorsResponse();
-            doctorsResponse.IsSuccess = true;
-            doctorsResponse.Message = "Sucessfull";
-            try
-            {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            }
-            catch(Exception ex)
-            {
+            var claims = new[] {
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("FirstName", userInfo.firstName),
+                new Claim("LastName", userInfo.lastName),
+                new Claim("EmailId", userInfo.emailid),
+                new Claim("Address", userInfo.address),
+                new Claim("Age", Convert.ToString(userInfo.age)),
+                new Claim("Date", DateTime.Now.ToString()),
+            };
 
-            }
-            finally
-            {
+            var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
+                                _configuration["Jwt:Audiance"],
+                                claims,
+                                expires: DateTime.Now.AddMinutes(120),
+                                signingCredentials: credentials);
 
-            }
-            throw new NotImplementedException();
+            string Data = new JwtSecurityTokenHandler().WriteToken(token);
+            return Data;
         }
     }
 }

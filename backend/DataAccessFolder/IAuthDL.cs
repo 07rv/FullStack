@@ -10,6 +10,5 @@ namespace backend.DataAccessFolder
     {
         public Task<SignUpResponse> SignUp(SignUpRequest signUpRequest);
         public Task<SignInResponse> SignIn(SignInRequest signInRequest);
-        public Task<DoctorsResponse> CreateDoctor(DoctorsRequest doctorsRequest);
     }
 }

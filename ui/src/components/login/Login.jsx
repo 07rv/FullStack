@@ -69,8 +69,9 @@ export class Login extends React.Component {
           "emailid": this.state.emailAddress,
           "password": this.state.password,
         }
-        authServices.SignIn(data).then((data)=>{
-          if(data.data.isSuccess){
+        authServices.SignIn(data).then((dataa)=>{
+          if(dataa.data.isSuccess){
+            localStorage.setItem('jwtToken', dataa.data.token);
             redirectToHome()
           }
           else{

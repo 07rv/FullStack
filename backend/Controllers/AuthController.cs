@@ -2,6 +2,7 @@
 using backend.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace backend.Controllers
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class AuthController : ControllerBase
     {
         public readonly IAuthDL _authDL;
@@ -18,6 +20,7 @@ namespace backend.Controllers
             _authDL = authDL;
         }
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> SignupAsync(SignUpRequest signUpRequest)
         {
             SignUpResponse signUpResponse = new SignUpResponse();
@@ -35,6 +38,7 @@ namespace backend.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> SignIn(SignInRequest signInRequest)
         {
             SignInResponse signInResponse = new SignInResponse();
