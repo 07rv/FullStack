@@ -8,6 +8,7 @@ import GeneralPhysician from './components/GeneralPhysician/GeneralPhysician';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Carousel from './components/carousel/Carousel';
 import EditProfile from './components/EditProfile/EditProfile';
+import Box from '@mui/material/Box';
 
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
           <Route exact path="/doctorlist" element={<DoctorList />} />
           <Route exact path="/generalphysician" element={<GeneralPhysician />} />
           <Route exact path="/editprofile" element={<EditProfile/>}/>
+          <Route exact path="*" element={<Box align='center' sx={{}}>404: Page unreachable</Box>}/>
         </Routes>
       </Router>
     </div>
