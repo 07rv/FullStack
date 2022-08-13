@@ -71,5 +71,23 @@ namespace backend.Controllers
 
             return Ok(doctorsResponse);
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateUser(SignUpRequest signUpRequest)
+        {
+            SignInResponse signInResponse = new SignInResponse();
+            try
+            {
+                signInResponse = await _authDL.UpdateUser(signUpRequest);
+            }
+            catch (Exception ex)
+            {
+                signInResponse.IsSuccess = false;
+                signInResponse.Message = ex.Message;
+            }
+
+            return Ok(signInResponse);
+        }
     }
 }

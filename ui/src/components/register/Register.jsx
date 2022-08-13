@@ -71,7 +71,7 @@ export class Register extends React.Component {
   handleSubmit = e=>{
     this.CheckValidity()
     if(this.state.firstName !== '' && this.state.lastName !== '' &&
-       this.state.emailAddress !== '' && this.state.confirmPassword !== '' &&
+       this.state.emailAddress !== '' && this.state.password !== '' &&
        this.state.confirmPassword !== '')
     {
       if(!Configuration.validEmail.test(this.state.emailAddress)){

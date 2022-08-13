@@ -189,6 +189,57 @@ namespace backend.DataAccessFolder
             return doctorsResponse;
         }
 
+        public async Task<SignInResponse> UpdateUser(SignUpRequest signUpRequest)
+        {
+            SignInResponse signInResponse = new SignInResponse();
+            signInResponse.IsSuccess = true;
+            signInResponse.Message = "Sucessfull";
+            SqlConnection sqlConnection = GetConnection();
+            try
+            {
+                if (sqlConnection.State != System.Data.ConnectionState.Open)
+                    await sqlConnection.OpenAsync();
+
+                using (SqlCommand sqlCommand = new SqlCommand("dbo.UpdateUser", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.CommandTimeout = 180;
+                    sqlCommand.Parameters.AddWithValue("@EmailId", signUpRequest.emailid);
+                    sqlCommand.Parameters.AddWithValue("@FirstName", signUpRequest.firstName);
+                    sqlCommand.Parameters.AddWithValue("@LastName", signUpRequest.lastName);
+                    sqlCommand.Parameters.AddWithValue("@Age", signUpRequest.age);
+                    sqlCommand.Parameters.AddWithValue("@Address", signUpRequest.address);
+
+                    int status = await sqlCommand.ExecuteNonQueryAsync();
+                    if(status <= 0)
+                    {
+                        signInResponse.IsSuccess = false;
+                        signInResponse.Message = "Un Sucessfull";
+                        return signInResponse;
+                    }
+                    UserInfo userInfo = new UserInfo();
+                    userInfo.firstName = signUpRequest.firstName;
+                    userInfo.lastName = signUpRequest.lastName;
+                    userInfo.emailid = signUpRequest.emailid;
+                    userInfo.address = signUpRequest.address;
+                    userInfo.age = Convert.ToInt16(signUpRequest.age);
+
+                    signInResponse.Token = GenerateJwt(userInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                signInResponse.IsSuccess = false;
+                signInResponse.Message = ex.Message;
+            }
+            finally
+            {
+                await sqlConnection.CloseAsync();
+                await sqlConnection.DisposeAsync();
+            }
+            return signInResponse;
+        }
+
         public string GenerateJwt(UserInfo userInfo)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
