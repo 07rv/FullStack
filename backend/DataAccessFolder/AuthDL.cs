@@ -135,6 +135,60 @@ namespace backend.DataAccessFolder
             return signUpResponse;
         }
 
+        public async Task<DoctorsResponse> GetDoctors()
+        {
+            DoctorsResponse doctorsResponse = new DoctorsResponse();
+            doctorsResponse.IsSuccess = true;
+            doctorsResponse.Message = "Sucessfull";
+            SqlConnection sqlConnection = GetConnection();
+            try
+            {
+                if (sqlConnection.State != ConnectionState.Open)
+                    await sqlConnection.OpenAsync();
+                using (SqlCommand sqlCommand = new SqlCommand("dbo.GetDoctor", sqlConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.CommandTimeout = 180;
+
+                    using (DbDataReader dataReader = await sqlCommand.ExecuteReaderAsync())
+                    {
+                        if (dataReader.HasRows)
+                        {
+                            doctorsResponse.IsSuccess = true;
+                            doctorsResponse.Message = "Sucessfull";
+                            List<DoctorsInfo> doctorsInfos = new List<DoctorsInfo>();
+                            doctorsResponse.Doctorinfo = doctorsInfos;
+                            while (await dataReader.ReadAsync())
+                            {
+                                DoctorsInfo doctorsInfo = new DoctorsInfo();
+                                doctorsInfo.firstName = dataReader["FirstName"] != DBNull.Value ? Convert.ToString(dataReader["FirstName"]) : "";
+                                doctorsInfo.lastName = dataReader["LastName"] != DBNull.Value ? Convert.ToString(dataReader["LastName"]) : "";
+                                doctorsInfo.emailid = dataReader["EmailId"] != DBNull.Value ? Convert.ToString(dataReader["EmailId"]) : "";
+                                doctorsInfo.award = dataReader["Award"] != DBNull.Value ? Convert.ToString(dataReader["Award"]) : "";
+                                doctorsInfo.age = dataReader["Age"] != DBNull.Value ? Convert.ToInt32(dataReader["Age"]) : 0;
+                                doctorsInfo.experience = dataReader["Experience"] != DBNull.Value ? Convert.ToInt32(dataReader["Experience"]) : 0;
+
+                                doctorsInfos.Add(doctorsInfo);
+                            }
+
+                        }
+                        else
+                        {
+                            doctorsResponse.IsSuccess = false;
+                            doctorsResponse.Message = "Unsucessfull";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                doctorsResponse.IsSuccess = false;
+                doctorsResponse.Message = ex.Message;
+            }
+
+            return doctorsResponse;
+        }
+
         public string GenerateJwt(UserInfo userInfo)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

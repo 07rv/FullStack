@@ -1,0 +1,8 @@
+
+
+CREATE PROCEDURE GetDoctor
+As
+BEGIN
+	SELECT * FROM HealthXOXO.dbo.Doctors(NOLOCK)
+END
+GO

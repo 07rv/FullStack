@@ -6,22 +6,21 @@ using System.Threading.Tasks;
 
 namespace backend.Model
 {
-    public class DoctorsRequest
+    public class DoctorsResponse
     {
-        [Required]
+        public bool IsSuccess { get; set; }
+        public string Message { get; set; }
+        public List<DoctorsInfo> Doctorinfo { get; set; }
+    }
+
+
+    public class DoctorsInfo
+    {
         public string emailid { get; set; }
-        [Required]
         public string firstName { get; set; }
         public string lastName { get; set; }
         public int age { get; set; }
         public int experience { get; set; }
         public string award { get; set; }
     }
-
-    public class DoctorsResponse
-    {
-        public bool IsSuccess { get; set; }
-        public string Message { get; set; }
-    }
-
 }

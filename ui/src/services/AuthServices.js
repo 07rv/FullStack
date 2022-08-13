@@ -11,4 +11,7 @@ export default class AuthServices{
     SignIn(data){
         return axiosServices.post(Configuration.SignIn, data, false)
     }
+    GetDoctor(){
+        return axiosServices.get(Configuration.Doctors, false)
+    }
 }

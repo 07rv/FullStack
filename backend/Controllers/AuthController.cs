@@ -12,7 +12,7 @@ namespace backend.Controllers
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class AuthController : ControllerBase
     {
         public readonly IAuthDL _authDL;
@@ -53,6 +53,23 @@ namespace backend.Controllers
             }
 
             return Ok(signInResponse);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDoctors()
+        {
+            DoctorsResponse doctorsResponse = new DoctorsResponse();
+            try
+            {
+                doctorsResponse = await _authDL.GetDoctors();
+            }
+            catch(Exception ex)
+            {
+                doctorsResponse.IsSuccess = false;
+                doctorsResponse.Message = ex.Message;
+            }
+
+            return Ok(doctorsResponse);
         }
     }
 }
