@@ -6,6 +6,6 @@ export default  class AxiosServices{
         return axios.post(url, data,IsRequired && Header)
     }
     get(url, IsRequired=false, Header){
-        return axios.get(url);
+        return axios.get(url, IsRequired && Header);
     }
 }
