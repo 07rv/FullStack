@@ -14,7 +14,6 @@ import ShareIcon from '@mui/icons-material/Share';
 import { Navbar } from '../navbar/Navbar';
 
 export default function Carousel() {
-    localStorage.setItem('jwtToken', '');
   return (
     <Box>
         <Navbar/>

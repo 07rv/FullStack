@@ -11,7 +11,16 @@ import Search from '../search/Search';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import Profile from '../Profile/Profile';
 
+function redirectToHome()
+{
+  window.location="/";
+}
+
 const Home = () => {
+  const handleSubmit = e=>{
+    localStorage.removeItem('jwtToken');
+    redirectToHome();
+  }
   const paperStyle = {padding:10, margin:"20px auto"}
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -49,9 +58,9 @@ const Home = () => {
           <Typography sx={{flexGrow:1}}>
           </Typography>
           <Box align='right' sx={{flexGrow:1, ml:10}}>
-            <Link to="/" style={{textDecoration: 'none'}}>
-              <Button style={{backgroundColor: "#121313c8"}} type='submit' variant='contained'>Logout <ExitToAppOutlinedIcon/></Button>
-            </Link>
+              <Button onClick={handleSubmit} style={{backgroundColor: "#121313c8"}} type='submit' variant='contained'>
+                Logout <ExitToAppOutlinedIcon/>
+              </Button>
           </Box>
         </Toolbar>
       </AppBar>

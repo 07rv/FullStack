@@ -18,7 +18,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 function redirectToHome()
 {
   window.location="/home";
-  window.localStorage.setItem('click',true);
 }
 
 export class Login extends React.Component {
@@ -124,7 +123,8 @@ export class Login extends React.Component {
                         name='password'
                         placeholder='Enter password' value={this.state.password}
                         error={this.state.passwordFlag}
-                        onChange={this.handleChange} />
+                        onChange={this.handleChange} 
+                />
               </Grid>
               
               <Grid align='center' sx={{mt:2}}>

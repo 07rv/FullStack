@@ -12,7 +12,16 @@ import { doctors } from '../../data/doctor';
 import Grid from '@mui/material/Grid';
 import Profile from '../Profile/Profile';
 
+
+function redirectToHome()
+{
+  window.location="/";
+}
 const GeneralPhysician = () => {
+  const handleSubmit = e=>{
+    localStorage.removeItem('jwtToken');
+    redirectToHome();
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -25,9 +34,9 @@ const GeneralPhysician = () => {
             </Link>
           </Typography>
           <Box>
-            <Link to="/" style={{textDecoration: 'none'}}>
-                <Button style={{backgroundColor: "#121313c8"}} type='submit' variant='contained'>Logout <ExitToAppOutlinedIcon/></Button>
-            </Link>
+            <Button onClick={handleSubmit} style={{backgroundColor: "#121313c8"}} type='submit' variant='contained'>
+              Logout <ExitToAppOutlinedIcon/>
+            </Button>
           </Box>      
         </Toolbar>
       </AppBar>

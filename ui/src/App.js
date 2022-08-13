@@ -1,5 +1,4 @@
 import './App.css';
-import { Navbar } from './components/navbar/Navbar';
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import Home from './components/home/Home';
@@ -8,32 +7,49 @@ import GeneralPhysician from './components/GeneralPhysician/GeneralPhysician';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Carousel from './components/carousel/Carousel';
 import EditProfile from './components/EditProfile/EditProfile';
+import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import Box from '@mui/material/Box';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import MarkChatUnreadSharpIcon from '@mui/icons-material/MarkChatUnreadSharp';
+import Typography from '@mui/material/Typography';
+import {Link} from "react-router-dom";
+
 
 
 
 const App = () => {
+  const auth = localStorage.getItem('jwtToken');
+
   return (
     <div className="App">
       <Router>
         <Routes>
           <Route exact path="/" element={<Carousel />} />
-          <Route exact path="/navbar" element={<Navbar />} />
           <Route exact path="/login" element={<Login />}/>
           <Route exact path="/register" element={<Register />}/>
-          <Route exact path="/home" element={<Home />} />
-          <Route exact path="/doctorlist" element={<DoctorList />} />
-          <Route exact path="/generalphysician" element={<GeneralPhysician />} />
-          <Route exact path="/editprofile" element={<EditProfile/>}/>
+
+          {auth &&
+             <Route exact path="/home" element={<Home />} />
+          }
+          {auth &&
+             <Route exact path="/doctorlist" element={<DoctorList />} />
+          }
+          { auth &&
+            <Route exact path="/generalphysician" element={<GeneralPhysician />} />
+          }
+          { auth &&
+            <Route exact path="/editprofile" element={<EditProfile/>}/>
+          }
           <Route exact path="*" 
-                  element={
+                  element=
+                  {
+                    <Typography component="div">
                       <Box className='center'>
-                        <SentimentVeryDissatisfiedIcon sx={{pr:1}} style={{ color: "black" }}fontSize="large"/>
-                        404: Page unreachable
-                        <MarkChatUnreadSharpIcon sx={{pl:1}} style={{ color: "black" }} fontSize="large"/>
-                      </Box>}/>
+                        <Link to="/login">
+                          <ReplyAllIcon sx={{pr:1}} style={{ color: "black" }} fontSize="large"/>
+                        </Link>
+                        404: Page unreachable or not found <br/>
+                      </Box>
+                    </Typography>
+                  }/>
         </Routes>
       </Router>
     </div>

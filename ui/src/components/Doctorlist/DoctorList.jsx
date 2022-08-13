@@ -10,7 +10,15 @@ import Button from '@mui/material/Button';
 import Profile from '../Profile/Profile';
 import Search from '../search/Search';
 
+function redirectToHome()
+{
+  window.location="/";
+}
 const DoctorList = () => {
+  const handleSubmit = e=>{
+    localStorage.removeItem('jwtToken');
+    redirectToHome();
+  }
   const paperStyle = {padding:10,  margin:"20px auto"}
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -54,9 +62,9 @@ const DoctorList = () => {
             <Typography sx={{flexGrow:1}}>
             </Typography>
             <Box align='right' sx={{flexGrow:1, ml:5}}>
-              <Link to="/" style={{textDecoration: 'none'}}>
-                <Button style={{backgroundColor: "#121313c8"}} type='submit' variant='contained'>Logout <ExitToAppOutlinedIcon/></Button>
-              </Link>
+                <Button onClick={handleSubmit} style={{backgroundColor: "#121313c8"}} type='submit' variant='contained'>
+                  Logout <ExitToAppOutlinedIcon/>
+                </Button>
             </Box>
         </Toolbar>
       </AppBar>
