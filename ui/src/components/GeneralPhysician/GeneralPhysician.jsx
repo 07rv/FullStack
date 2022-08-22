@@ -17,50 +17,58 @@ function redirectToHome()
 {
   window.location="/";
 }
-const GeneralPhysician = () => {
-  const handleSubmit = e=>{
+
+export class GeneralPhysician extends React.Component {
+
+  handleSubmit = e=>{
     localStorage.removeItem('jwtToken');
     redirectToHome();
   }
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
-            <Link to="/doctorlist" style={{textDecoration: 'none'}}>
-              <b sx={{color: 'text.primary'}}>
-              <Box sx={{ color: 'text.primary' }}>General Physician</Box>
-              </b>
-            </Link>
-          </Typography>
-          <Box>
-            <Button onClick={handleSubmit} style={{backgroundColor: "#121313c8"}} type='submit' variant='contained'>
-              Logout <ExitToAppOutlinedIcon/>
-            </Button>
-          </Box>      
-        </Toolbar>
-      </AppBar>
 
 
-      <Box sx={{ maxWidth: '100%', ml:2, mr:2, mb:3 }}>
-        <Grid container spacing={1} sx={{m:2, display: 'flex',flexDirection: 'row'}}>
-          <Grid item xs={9} >
-            <Search/>
-            <Box sx={{display: 'flex',flexDirection: 'row',flexWrap: 'wrap',}}>
-              {doctors.map(items=>(
-                <Doctor key={items.id} name={items.name} degree={items.degree} 
-                    hospital={items.hospital} experience = {items.experience+': years'}
-                    award={items.award} img={items.img} />
-              ))}
-            </Box>
+  render(){
+    return (
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1}}>
+              <Link to="/doctorlist" style={{textDecoration: 'none'}}>
+                <b sx={{color: 'text.primary'}}>
+                <Box sx={{ color: 'text.primary' }}>General Physician</Box>
+                </b>
+              </Link>
+            </Typography>
+            <Box>
+              <Button onClick={this.handleSubmit} style={{backgroundColor: "#121313c8"}} type='submit' variant='contained'>
+                Logout <ExitToAppOutlinedIcon/>
+              </Button>
+            </Box>      
+          </Toolbar>
+        </AppBar>
+
+        {console.log('list',Array)}
+    
+        <Box sx={{ maxWidth: '100%', ml:2, mr:2, mb:3 }}>
+          <Grid container spacing={1} sx={{m:2, display: 'flex',flexDirection: 'row'}}>
+            <Grid item xs={9} >
+              <Search/>
+              <Box sx={{display: 'flex',flexDirection: 'row',flexWrap: 'wrap',}}>
+                {doctors.map(items=>(
+                  <Doctor key={items.id} name={items.name} degree={items.degree} 
+                      hospital={items.hospital} experience = {items.experience+': years'}
+                      award={items.award} img={items.img} />
+                ))}
+              </Box>
+            </Grid>
+            <Grid item xs={2.5}>
+              <Profile/>
+            </Grid>
           </Grid>
-          <Grid item xs={2.5}>
-            <Profile/>
-          </Grid>
-        </Grid>
+        </Box>
       </Box>
-    </Box>
-  )
+    )
+  }
+
 }
 
 export default GeneralPhysician
